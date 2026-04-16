@@ -1,0 +1,86 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  nome      String
+  email     String   @unique
+  senha     String
+  role      String   @default("MEMBRO")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reservas   Reserva[]
+  filaEspera FilaDeEspera[]
+
+  @@map("users")
+}
+
+model TipoAula {
+  id        String   @id @default(cuid())
+  nome      String   @unique
+  descricao String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  aulasAgendadas AulaAgendada[]
+
+  @@map("tipos_aula")
+}
+
+model AulaAgendada {
+  id               String   @id @default(cuid())
+  tipoAulaId       String
+  dataHoraInicio   DateTime
+  dataHoraFim      DateTime
+  limiteVagas      Int
+  vagasDisponiveis Int
+  local            String?
+  instrutor        String?
+  status           String   @default("AGENDADA")
+  version          Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  tipoAula   TipoAula       @relation(fields: [tipoAulaId], references: [id])
+  reservas   Reserva[]
+  filaEspera FilaDeEspera[]
+
+  @@map("aulas_agendadas")
+}
+
+model Reserva {
+  id             String    @id @default(cuid())
+  membroId       String
+  aulaAgendadaId String
+  status         String    @default("CONFIRMADA")
+  criadaEm       DateTime  @default(now())
+  canceladaEm    DateTime?
+
+  membro       User         @relation(fields: [membroId], references: [id])
+  aulaAgendada AulaAgendada @relation(fields: [aulaAgendadaId], references: [id])
+
+  @@unique([membroId, aulaAgendadaId])
+  @@map("reservas")
+}
+
+model FilaDeEspera {
+  id             String   @id @default(cuid())
+  membroId       String
+  aulaAgendadaId String
+  posicao        Int
+  criadaEm       DateTime @default(now())
+  notificado     Boolean  @default(false)
+
+  membro       User         @relation(fields: [membroId], references: [id])
+  aulaAgendada AulaAgendada @relation(fields: [aulaAgendadaId], references: [id])
+
+  @@unique([membroId, aulaAgendadaId])
+  @@map("fila_de_espera")
+}
