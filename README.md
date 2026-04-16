@@ -2,7 +2,7 @@
 
 ## 🎥 Vídeo de Demonstração
 
-[![Assistir Demonstração](https://img.shields.io/badge/▶_Assistir_Demonstração-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/SSzcPf8K7l8)
+[![Assistir](https://img.shields.io/badge/▶_Assistir_Demonstração-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/SSzcPf8K7l8)
 
 > **Entrega P3 - Recuperação Final | Tag: `v3.0.0-rec`**  
 > Disciplina: Desenvolvimento Web — Prof. Ronaldo Amaral  
