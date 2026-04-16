@@ -1,7 +1,7 @@
 # 🏋️ Ed's Gym — Sistema de Reserva de Aulas
 
 ## 🎥 Vídeo de Demonstração
-[![Assistir Demonstração](https://img.shields.io/badge/▶_Assistir-YouTube-red?style=for-the-badge)](SEU_LINK_AQUI)
+[![Assistir Demonstração](https://img.shields.io/badge/▶_Assistir-YouTube-red?style=for-the-badge)](https://youtu.be/SSzcPf8K7l8)
 
 ---
 
